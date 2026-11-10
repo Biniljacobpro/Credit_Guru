@@ -59,8 +59,8 @@ const createInvoice = async (req, res, next) => {
       [invoiceNumber.trim(), customerId, invoiceDate, dueDate, total],
     );
     for (const item of calculated) {
-      await client.query("INSERT INTO invoice_items (invoice_id, description, quantity, unit_price, tax_rate, line_total) VALUES ($1, $2, $3, $4, $5, $6)",
-        [invoice.rows[0].id, item.description, item.quantity, item.unitPrice, item.taxRate, item.lineTotal]);
+      await client.query("INSERT INTO invoice_items (invoice_id, description, quantity, unit_price, tax_rate) VALUES ($1, $2, $3, $4, $5)",
+        [invoice.rows[0].id, item.description, item.quantity, item.unitPrice, item.taxRate]);
     }
     await client.query("COMMIT");
     res.status(201).json({ id: invoice.rows[0].id, invoiceNumber: invoiceNumber.trim(), total, status: "unpaid" });

@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Customers from "./pages/Customers";
 import Invoices from "./pages/Invoices";
@@ -7,7 +7,7 @@ import InvoiceDetails from "./pages/InvoiceDetails";
 
 export default function App() {
   return <BrowserRouter><Routes><Route element={<DashboardLayout />}>
-    <Route path="/" element={<Navigate to="/customers" replace />} />
+    <Route path="/" element={<Customers />} />
     <Route path="/customers" element={<Customers />} />
     <Route path="/invoices" element={<Invoices />} />
     <Route path="/invoices/new" element={<CreateInvoice />} />

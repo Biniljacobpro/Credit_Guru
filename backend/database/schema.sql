@@ -25,7 +25,9 @@ CREATE TABLE IF NOT EXISTS invoice_items (
   quantity NUMERIC(12, 3) NOT NULL CHECK (quantity > 0),
   unit_price NUMERIC(12, 2) NOT NULL CHECK (unit_price >= 0),
   tax_rate NUMERIC(5, 2) NOT NULL DEFAULT 0 CHECK (tax_rate >= 0 AND tax_rate <= 100),
-  line_total NUMERIC(12, 2) NOT NULL CHECK (line_total >= 0)
+  line_total NUMERIC(12, 2) GENERATED ALWAYS AS (
+    ROUND(quantity * unit_price * (1 + tax_rate / 100), 2)
+  ) STORED
 );
 
 CREATE TABLE IF NOT EXISTS payments (
