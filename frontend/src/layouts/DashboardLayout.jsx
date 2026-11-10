@@ -1,0 +1,2 @@
+import { useState } from "react"; import { Outlet } from "react-router-dom"; import Sidebar from "../components/Sidebar"; import Navbar from "../components/Navbar";
+export default function DashboardLayout(){const [open,setOpen]=useState(false);return <div className="app-shell"><Sidebar open={open} onClose={()=>setOpen(false)}/><main className="main"><Navbar onMenu={()=>setOpen(true)}/><section className="content"><Outlet/></section></main></div>;}
